@@ -2,8 +2,11 @@ import api from "./axiosInstance"
 
 
 const postApi = {
-    getPosts: ()=>{
-        return api.get("/posts")
+    getPosts: (limit = 10)=>{
+        return api.get(`/posts?_limit=${limit}`)
+    },
+    getComments: (limit = 10)=>{
+        return api.get(`/comments?_limit=${limit}`)
     }
 }
 

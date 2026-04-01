@@ -6,6 +6,7 @@ import postApi from './api/apiPost'
 function App() {
 
   const [posts, setPosts] = useState([])
+  const [comments, setComments] = useState([])
 
   async function fetchPosts(){
     const response = await postApi.getPosts()
@@ -14,8 +15,15 @@ function App() {
     console.log(response)
   }
 
+  async function fetchComments(){
+    const response = await postApi.getComments()
+    setComments(response.data)
+    console.log(response)
+  }
+
   useEffect(()=>{
     fetchPosts()
+    fetchComments()
   }, [])
 
   return (
@@ -27,6 +35,14 @@ function App() {
       <div key={post.id}>
         <h2>{post.title}</h2>
         <p>{post.body}</p>
+      </div>
+    ))}
+  </div>
+  <div>
+    {comments.map(comment => (
+      <div key={comment.id}>
+        <h2>{comment.name}</h2>
+        <p>{comment.email}</p>
       </div>
     ))}
   </div>
