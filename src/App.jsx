@@ -1,9 +1,12 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import './App.css'
 import Parent from './components/Parent'
 import postApi from './api/apiPost'
+import { myContext } from './apiContext/Context'
 
 function App() {
+
+  const {name,age} = useContext(myContext)
 
   const [posts, setPosts] = useState([])
   const [comments, setComments] = useState([])
@@ -37,6 +40,10 @@ function App() {
   return (
   <>
   {/* <Parent/> */}
+
+  <div style={{color: 'red', fontSize:'30px'}}>
+    {name} is my self and i am {age} years old
+  </div>
 
   <div>
     {posts.map(post => (
