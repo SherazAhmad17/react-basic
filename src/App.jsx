@@ -7,6 +7,7 @@ function App() {
 
   const [posts, setPosts] = useState([])
   const [comments, setComments] = useState([])
+  const [photos, setPhotos] = useState([])
 
   async function fetchPosts(){
     const response = await postApi.getPosts()
@@ -21,10 +22,17 @@ function App() {
     console.log(response)
   }
 
+  async function getPhotos() {
+    const response = await postApi.getPhotos()
+    setPhotos(response.data)
+    console.log(response)
+  }
+
   useEffect(()=>{
     fetchPosts()
     fetchComments()
-  }, [])
+    getPhotos()
+    }, [])
 
   return (
   <>
@@ -43,6 +51,15 @@ function App() {
       <div key={comment.id}>
         <h2>{comment.name}</h2>
         <p>{comment.email}</p>
+      </div>
+    ))}
+  </div>
+
+  <div>
+    {photos.map(photo => (
+      <div key={photo.id}>
+        <h1>sheraz photo</h1>
+        <img src={photo.url} alt={photo.title} />
       </div>
     ))}
   </div>

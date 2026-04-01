@@ -7,6 +7,15 @@ const postApi = {
     },
     getComments: (limit = 10)=>{
         return api.get(`/comments?_limit=${limit}`)
+    },
+    getPhotos: (count = 10)=>{
+        return (
+            api.get(`/photos`, {
+                params:{
+                    _limit: count
+                }
+            })
+        )
     }
 }
 
